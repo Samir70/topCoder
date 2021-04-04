@@ -1,0 +1,29 @@
+body {
+    background: #CFF;
+    display: grid;
+    place-items: center;
+    width: 95%;
+    height: 100%;
+    margin: 0px;
+    padding: 5px;
+    color: black;
+}
+
+textarea, label {
+    display: block;
+}
+button {
+    display: block;
+    margin: auto;
+    background: rgb(235, 41, 235);
+    color: white;
+    padding: 5px;
+    border-radius: 10%;
+}
+button:hover {
+    background: purple;
+}
+#translation {
+    background: white;
+    display: block;
+}

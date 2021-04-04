@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src='./resources/vue.min.js'></script> -->
+    <script src='./resources/vue-dev.js'></script>
+    <script src='./resources/axios.min.js'></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="translationChallenge.css">
+    <title>Translator App for topCoder practise challenge</title>
+</head>
+<body>
+    <h1>Translation app</h1>
+    <p>Using the provided API to do the translation.</p>
+    <div id="translator-app">
+        <label for="original-text">Type in the English text to translate</label>
+        <textarea id="original-text" rows="5" cols="40" 
+            v-model:value="engText" 
+            v-on:input="translatedText='Waiting for user to press translate button...'">
+        </textarea>
+        <button v-on:click="translate">Translate</button>
+        <hr />
+        <label for="translation">Translated text will appear here!</label>
+        <div id="translation">{{translatedText}}</div>
+    </div>
+    <script>
+        var transApp = new Vue({
+            el: "#translator-app",
+            data: {
+                engText: 'How do I get from leetCode to topCoder?',
+                translatedText: ''
+            },
+            methods: {
+                translate: function () {
+                    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+                        .then(res => this.translatedText = res.data.bpi)
+                        .catch(err => {
+                            console.log(err);
+                            this.translatedText = 'Oops! Something happened. See console for error mesasge'
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
