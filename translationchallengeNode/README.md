@@ -7,16 +7,24 @@ You can download the folder (or fork the repo), run
 ```
 npm install
 ```
-to install the dependencies. (There is only [axios](https://axios-http.com/docs/intro/))
-Then run:
+to install the dependencies. (There is only [axios](https://axios-http.com/docs/intro/) and [readlineSync](https://www.npmjs.com/package/readline-sync))
+Then run, to try out the demo version with a set sentence:
 ```
 node translationChallenge.js
 ```
 The file will run.
 The demo version translates the sentence "How do I get from leetCode to topCoder?" from English into Czech: "Jak se dostanu z leetCode do topCoder?"
 
+To run the version where the user can input a sentence to translate, type:
+```
+node userInput.js
+```
+You will be prompted to type in a sentence. And rpess enter. 
+
+The results seem fairly good (says someone who barely speaks Czech)
+
 # Help understanding the response from Google's API
-By console logging the initial response, I found that res.data ahs the important part we need:
+By console logging the initial response, I found that res.data has the important part we need:
 ```
 { sentences:
    [ { trans: 'Jak se dostanu z leetCode do topCoder?',
