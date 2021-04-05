@@ -19,7 +19,7 @@ To run the version where the user can input a sentence to translate, type:
 ```
 node userInput.js
 ```
-You will be prompted to type in a sentence. And rpess enter. 
+You will be prompted to type in a sentence. And press enter. 
 
 The results seem fairly good (says someone who barely speaks Czech)
 
