@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- <script src='./resources/vue.min.js'></script> -->
     <script src='./resources/vue-dev.js'></script>
-    <script src='./resources/axios.min.js'></script>
+    <!-- <script src='./resources/axios.min.js'></script> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="translationChallenge.css">
     <title>Translator App for topCoder practise challenge</title>
 </head>
+
 <body>
     <h1>Translation app</h1>
     <p>Using the provided API to do the translation.</p>
     <div id="translator-app">
         <label for="original-text">Type in the English text to translate</label>
-        <textarea id="original-text" rows="5" cols="40" 
-            v-model:value="engText" 
+        <textarea id="original-text" rows="5" cols="40" v-model:value="engText"
             v-on:input="translatedText='Waiting for user to press translate button...'">
         </textarea>
         <button v-on:click="translate">Translate</button>
@@ -25,6 +26,22 @@
         <div id="translation">{{translatedText}}</div>
     </div>
     <script>
+        const url = "https://translate.google.com/translate_a/single?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=%25s&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e&";
+        let config = {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "User-Agent": "AndroidTranslate/5.3.0.RC02.130475354-53000263 5.1 phone TRANSLATE_OPM5_TEST_1",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Credentials": true
+            },
+            // withCrendtials: true,
+            // credentials: "same-origin",
+            // crossdomain: true,
+            mode: "no-cors"
+        }
         var transApp = new Vue({
             el: "#translator-app",
             data: {
@@ -33,15 +50,27 @@
             },
             methods: {
                 translate: function () {
-                    axios.get('https://translate.google.com/translate_a/single?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=%25s&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e&')
+                    let data = "sl=en&tl=cs&q=" + this.engText;
+                    fetch(url, {...config, body:data})
+                        // .then(res => res.text())
+                        .then(res => console.log(res))
                         .then(res => this.translatedText = res)
+                        // .then(res => console.log(res.text()))
                         .catch(err => {
                             console.log(err);
                             this.translatedText = 'Oops! Something happened. See console for error mesasge'
-                        })
+
+                        });
+                    // axios({ ...config, data })
+                    //     .then(res => this.translatedText = res)
+                    //     .catch(err => {
+                    //         console.log(err);
+                    //         this.translatedText = 'Oops! Something happened. See console for error mesasge'
+                    //     })
                 }
             }
         })
     </script>
 </body>
+
 </html>
