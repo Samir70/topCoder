@@ -8,7 +8,7 @@ You can download the folder (or fork the repo), run
 npm install
 ```
 to install the dependencies. (There is only [axios](https://axios-http.com/docs/intro/) and [readlineSync](https://www.npmjs.com/package/readline-sync))
-Then run, to try out the demo version with a set sentence:
+Then, to try out the demo version with a set sentence, run:
 ```
 node translationChallenge.js
 ```
